@@ -5,7 +5,10 @@ namespace Georgedsouza\Transcriptions;
 class Line
 {
     
-    public function __construct(public string $timestamp, public string $body)
+    public function __construct(
+        public string $position, 
+        public string $timestamp, 
+        public string $body)
     {
         
     }
@@ -17,14 +20,10 @@ class Line
         return $matches[1];
     }
     
-    public function toAnchorTag() : string
+    public function toHTML() : string
     {
         
         return "<a href=\"?time={$this->beginningTimestamp()}\">{$this->body}</a>";
     }
-    
-    public static function valid (string $line) : bool
-    {
-        return $line !== 'WEBVTT' && $line !== "" && (!is_numeric($line));
-    }
+
 }
